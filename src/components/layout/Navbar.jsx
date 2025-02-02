@@ -213,8 +213,8 @@ export default function Navbar() {
                 ref={(el) => (dropdownRefs.current[index] = el)}
               >
                 {item.submenu ? (
-                  <button
-                    onClick={() => setActiveDropdown(activeDropdown === index ? null : index)}
+                  <Link
+                    to={item.path}
                     className={`flex items-center space-x-2 px-4 py-3 hover:bg-gray-50 ${
                       location.pathname.startsWith(item.path)
                         ? "text-blue-600 border-b-2 border-blue-600"
@@ -223,7 +223,7 @@ export default function Navbar() {
                   >
                     {item.icon}
                     <span>{item.title}</span>
-                  </button>
+                  </Link>
                 ) : (
                   <Link
                     to={item.path}
