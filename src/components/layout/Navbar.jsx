@@ -14,6 +14,7 @@ import {
   FaBuilding,
   FaClipboard,
   FaTachometerAlt,
+
 } from "react-icons/fa"
 
 export default function Navbar() {
@@ -52,6 +53,7 @@ export default function Navbar() {
       icon: <FaTachometerAlt />,
       path: "/",
     },
+    
     {
       title: "Settings",
       icon: <FaCog />,
@@ -90,8 +92,22 @@ export default function Navbar() {
         { title: "Overview", path: "/financials/overview" },
         { title: "Transactions", path: "/financials/transactions" },
         { title: "Reports", path: "/financials/reports" },
+
+
       ],
     },
+
+    {
+      title: "Customer",
+      icon: <FaUserTie />,
+      path: "/customer",
+      submenu: [
+        { title: "All Customers", path: "/customer/all" },
+        { title: "Add Customer", path: "/customer/add" },
+        { title: "Customer Reports", path: "/customer/reports" },
+      ],
+    },
+    
   ]
 
   return (
@@ -100,8 +116,9 @@ export default function Navbar() {
       <div className="bg-gradient-to-r from-[#017ebe] via-[#0099ca] to-[#01adcc] text-white py-2">
         <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
           <div className="flex items-center space-x-4">
-            <Link to="/" className="flex items-center">
-              <img src="/logo-vertical.png" alt="Logo" className="h-12 w-32 object-contain" />
+            <Link to="/" className="flex items-center space-x-3">
+              <img src="/logo-text.png" alt="Logo" className="h-11" />
+              {/* <span className="text-xl font-bold">Admin Panel</span> */}
             </Link>
             <div className="relative">
               <input
@@ -170,7 +187,7 @@ export default function Navbar() {
                 className="flex items-center space-x-2 hover:bg-white/10 rounded-lg px-2 py-1"
               >
                 <img
-                  src="/avatar.jpg"
+                  src="/profile.jpeg"
                   alt="Profile"
                   className="w-8 h-8 rounded-full"
                   onError={(e) => {
@@ -213,8 +230,8 @@ export default function Navbar() {
                 ref={(el) => (dropdownRefs.current[index] = el)}
               >
                 {item.submenu ? (
-                  <Link
-                    to={item.path}
+                  <button
+                    onClick={() => setActiveDropdown(activeDropdown === index ? null : index)}
                     className={`flex items-center space-x-2 px-4 py-3 hover:bg-gray-50 ${
                       location.pathname.startsWith(item.path)
                         ? "text-blue-600 border-b-2 border-blue-600"
@@ -223,7 +240,7 @@ export default function Navbar() {
                   >
                     {item.icon}
                     <span>{item.title}</span>
-                  </Link>
+                  </button>
                 ) : (
                   <Link
                     to={item.path}

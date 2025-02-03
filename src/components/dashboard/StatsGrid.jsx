@@ -1,11 +1,13 @@
-import { FaUsers, FaHome, FaFileInvoiceDollar } from "react-icons/fa"
+import { FaUsers, FaHome } from "react-icons/fa"
+import { AiFillAlert } from "react-icons/ai";
+
 
 export default function StatsGrid() {
   const stats = [
     { label: "Tenants", value: "1", icon: FaUsers },
     { label: "Apartments", value: "1", icon: FaHome },
     { label: "Buildings", value: "1", icon: FaHome },
-    { label: "Unpaid Invoices", value: "0", icon: FaFileInvoiceDollar },
+    { label: "Unpaid Invoices", value: "0", icon: AiFillAlert },
   ]
 
   return (
@@ -14,7 +16,7 @@ export default function StatsGrid() {
         {stats.map((stat) => (
           <div key={stat.label} className="bg-white p-4 rounded-lg shadow">
             <div className="flex items-center justify-between">
-              <stat.icon className="h-8 w-8 text-blue-600" />
+              <stat.icon className="h-8 w-8 text-gray-600" />
               <span className="text-2xl font-bold">{stat.value}</span>
             </div>
             <p className="mt-2 text-sm text-gray-600">{stat.label}</p>

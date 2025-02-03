@@ -1,0 +1,83 @@
+import React, { useState } from 'react';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';  // Importing the eye icons from react-icons
+
+const Logo = () => {
+  return (
+    <div className="flex justify-center mb-8">
+      <img 
+        src="/logo.png" 
+        alt="Baraka Ale Apartment" 
+        className="h-20 object-contain"
+      />
+    </div>
+  );
+};
+
+const LoginForm = () => {
+  const [formData, setFormData] = useState({
+    username: '',
+    password: ''
+  });
+  const [showPassword, setShowPassword] = useState(false);  // State for toggling password visibility
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Login submitted:', formData);
+  };
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);  // Toggle password visibility
+  };
+
+  return (
+    <div className="max-w-lg mx-auto p-6 bg-white shadow-lg rounded-lg">
+      <Logo />
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div>
+          <input
+            type="text"
+            name="username"
+            placeholder="User Name"
+            value={formData.username}
+            onChange={handleChange}
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white/50 backdrop-blur-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+            required
+          />
+        </div>
+        <div className="relative">
+          <input
+            type={showPassword ? 'text' : 'password'}  // Toggle input type based on showPassword state
+            name="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={handleChange}
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white/50 backdrop-blur-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+            required
+          />
+          <button
+            type="button"
+            onClick={togglePasswordVisibility}
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500"
+          >
+            {showPassword ? <FaEyeSlash /> : <FaEye />}  {/* Display the appropriate icon */}
+          </button>
+        </div>
+        <button
+          type="submit"
+          className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition duration-200 shadow-lg"
+        >
+          LOGIN
+        </button>
+      </form>
+    </div>
+  );
+};
+
+export default LoginForm;
