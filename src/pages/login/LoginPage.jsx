@@ -1,5 +1,5 @@
 import React from 'react';
-import Login from '../../components/auth/Login';  
+import Login from '../../components/auth/Login';
 
 const LoginPage = () => {
   return (
@@ -11,7 +11,9 @@ const LoginPage = () => {
         backgroundBlendMode: 'overlay'
       }}
     >
-      <Login />
+      <div className="w-full max-w-md p-6rounded-lg  shadow-lg">
+        <Login />
+      </div>
     </div>
   );
 };

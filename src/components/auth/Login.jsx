@@ -37,7 +37,7 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="max-w-lg mx-auto p-6 bg-white shadow-lg rounded-lg">
+    <div className="max-w-md mx-auto p-6 bg-white shadow-lg rounded-lg">
       <Logo />
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
