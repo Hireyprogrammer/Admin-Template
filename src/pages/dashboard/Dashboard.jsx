@@ -1,6 +1,6 @@
-import StatsGrid from "../components/dashboard/StatsGrid"
-import DueRentals from "../components/dashboard/DueRentals"
-import RecentRents from "../components/dashboard/RecentRents"
+import StatsGrid from "../../components/dashboard/StatsGrid"
+import DueRentals from "../../components/dashboard/DueRentals"
+import RecentRents from "../../components/dashboard/RecentRents"
 
 export default function Dashboard() {
   return (

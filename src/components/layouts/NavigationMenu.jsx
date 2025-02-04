@@ -8,21 +8,24 @@ export default function NavigationMenu() {
   const dropdownRefs = useRef({});
 
   const menuItems = [
+    // query
     {
       title: "Dashboard",
       icon: <FaTachometerAlt />,
       path: "/",
+      // sub
     },
     {
       title: "Settings",
       icon: <FaCog />,
       path: "/settings",
       submenu: [
-        { title: "System Config", path: "/settings/system-config" },
-        { title: "Preferences", path: "/settings/preferences" },
-        { title: "Security", path: "/settings/security" },
+        //
+        { title: "Menus", path: "/settings/menus" },
+        { title: "Branches", path: "/settings/branches" },
       ],
     },
+
     {
       title: "Owner",
       icon: <FaHome />,
@@ -30,9 +33,21 @@ export default function NavigationMenu() {
       submenu: [
         { title: "Property List", path: "/owner/property-list" },
         { title: "Add Property", path: "/owner/add-property" },
-        { title: "Property Types", path: "/owner/property-types" },
       ],
     },
+
+    {
+      title: "Users",
+      icon: <FaUsers />,
+      path: "/users",
+      submenu: [
+        { title: "User Types", path: "/users/all" },
+        { title: "Users", path: "/users/list" },
+        { title: "Roles & Permissions", path: "/users/roles" },
+      ],
+    },
+
+   
     {
       title: "Users",
       icon: <FaUsers />,
@@ -44,6 +59,26 @@ export default function NavigationMenu() {
       ],
     },
   ];
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (activeDropdown !== null) {
+        const activeRef = dropdownRefs.current[activeDropdown];
+        if (activeRef && !activeRef.contains(event.target)) {
+          setActiveDropdown(null);
+        }
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [activeDropdown]);
+
+  // Handle submenu item click
+  const handleSubmenuClick = () => {
+    setActiveDropdown(null);
+  };
 
   return (
     <div className="bg-white shadow">
@@ -71,7 +106,12 @@ export default function NavigationMenu() {
               {item.submenu && activeDropdown === index && (
                 <div className="absolute left-0 mt-1 w-48 bg-white rounded-lg shadow-lg py-1">
                   {item.submenu.map((subItem) => (
-                    <Link key={subItem.title} to={subItem.path} className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                    <Link
+                      key={subItem.title}
+                      to={subItem.path}
+                      onClick={handleSubmenuClick}
+                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                    >
                       {subItem.title}
                     </Link>
                   ))}
